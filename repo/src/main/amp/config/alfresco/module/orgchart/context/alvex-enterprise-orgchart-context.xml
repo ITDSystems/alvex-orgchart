@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+<beans>
+	<bean id="alvex-orgchart-delegations-manager" abstract="true"
+		class="com.alvexcore.repo.activiti.OrgchartDelegationsManager" parent="alvex-activiti-connector-activiti-listener">
+		<property name="orgchartService" ref="alvex-orgchart-service" />
+		<property name="maxDelegationDepth">
+			<value>5</value>
+		</property>
+	</bean>
+
+	<!-- Bootstrap sync scripts -->
+	<bean id="alvex-orgchart-sync-bootstrap" 
+				class="org.alfresco.repo.module.ImporterModuleComponent" parent="module.baseComponent">
+		<!-- Module properties -->
+		<property name="moduleId" value="orgchart" />
+		<property name="name" value="Alvex orgchart sync scripts" />
+		<property name="description" value="Alvex orgchart sync scripts" />
+		<property name="sinceVersion" value="1.3" />
+		<property name="appliesFromVersion" value="1.3" />
+		<!-- Data properties -->
+		<property name="importer" ref="spacesBootstrap"/>
+		<property name="bootstrapViews">
+			<list>
+				<props>
+					<prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}/${spaces.scripts.childname}</prop>
+					<prop key="location">alfresco/bootstrap/alvex-orgchart.xml</prop>
+				</props>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Sync cron action -->
+	<bean id="alvex-orgchart-sync-cron-script" 
+				class="org.alfresco.repo.action.scheduled.SimpleTemplateActionDefinition">
+		<property name="actionName">
+			<value>script</value>
+		</property>
+		<property name="parameterTemplates">
+			<map>
+				<entry>
+					<key>
+						<value>script-ref</value>
+					</key>
+					<value>\$\{selectSingleNode('workspace://SpacesStore', 'lucene', 'PATH:"/app:company_home/app:dictionary/app:scripts/cm:alvex_sync_orgchart_cron_action.js"' )\}</value>
+				</entry>
+			</map>
+		</property>
+		<property name="templateActionModelFactory">
+			<ref bean="templateActionModelFactory"/>
+		</property>
+		<property name="dictionaryService">
+			<ref bean="DictionaryService"/>
+		</property>
+		<property name="actionService">
+			<ref bean="ActionService"/>
+		</property>
+		<property name="templateService">
+			<ref bean="TemplateService"/>
+		</property>
+	</bean>
+
+	<bean id="alvex-orgchart-sync-cron-config" class="org.alfresco.repo.action.scheduled.CronScheduledQueryBasedTemplateActionDefinition">
+		<property name="transactionMode">
+			<value>UNTIL_FIRST_FAILURE</value>
+		</property>
+		<property name="compensatingActionMode">
+			<value>IGNORE</value>
+		</property>
+		<property name="searchService">
+			<ref bean="SearchService"/>
+		</property>
+		<property name="templateService">
+			<ref bean="TemplateService"/>
+		</property>
+		<property name="queryLanguage">
+			<value>lucene</value>
+		</property>
+		<property name="stores">
+			<list>
+				<value>workspace://SpacesStore</value>
+			</list>
+		</property>
+		<property name="queryTemplate">
+			<value>TYPE:"alvexoc:syncConfig"</value>
+		</property>
+		<property name="cronExpression">
+			<value>0 0 1 * * ?</value>
+		</property>
+		<property name="jobName">
+			<value>orgchart-sync-job</value>
+		</property>
+		<property name="jobGroup">
+			<value>orgchart-sync-job-group</value>
+		</property>
+		<property name="triggerName">
+			<value>orgchart-sync-trigger</value>
+		</property>
+		<property name="triggerGroup">
+			<value>orgchart-sync-trigger-group</value>
+		</property>
+		<property name="scheduler">
+			<ref bean="schedulerFactory"/>
+		</property>
+		<property name="actionService">
+			<ref bean="ActionService"/>
+		</property>
+		<property name="templateActionModelFactory">
+			<ref bean="templateActionModelFactory"/>
+		</property>
+		<property name="templateActionDefinition">
+			<ref bean="alvex-orgchart-sync-cron-script"/>
+		</property>
+		<property name="transactionService">
+			<ref bean="TransactionService"/>
+		</property>
+		<property name="runAsUser">
+			<value>System</value>
+		</property>
+	</bean>
+
+</beans>

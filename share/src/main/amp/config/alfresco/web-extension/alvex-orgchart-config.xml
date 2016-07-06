@@ -1,0 +1,255 @@
+<alfresco-config>
+
+	<!-- Forms resources for orgchart controls -->
+	<config>
+		<forms>      
+			<dependencies>
+				<css src="/yui/datatable/assets/skins/sam/datatable.css" />
+				<css src="/components/profile/profile.css" />
+				<css src="/css/components/alvex/orgchart/orgchart-view.css" />
+				<css src="/css/grouped-data-table/grouped-data-table.css" />
+				<css src="/yui/assets/skins/sam/treeview.css" />
+				<js  src="/yui/yahoo-dom-event/yahoo-dom-event.js" />
+				<js  src="/yui/element/element.js" />
+				<js  src="/yui/uploader/uploader.js" />
+				<js  src="/yui/datasource/datasource.js" />
+				<js  src="/yui/datatable/datatable.js" />
+				<js  src="/yui/cookie/cookie.js" />
+				<js  src="/js/jit/jit-yc.js" />
+				<js  src="/yui/resize/resize.js" />
+				<js  src="/yui/treeview/treeview.js" />
+				<js  src="/yui/animation/animation.js" />
+				<js  src="/yui/dragdrop/dragdrop.js" />
+				<js  src="/js/components/alvex/orgchart/orgchart-view.js" />
+				<js  src="/js/components/alvex/orgchart/orgchart-group-view.js" />
+				<js  src="/js/grouped-data-table/grouped-data-table.js" />
+				<js  src="/js/components/alvex/alvex.js" />
+			</dependencies>
+		</forms>
+	</config>
+
+	<!--  TODO delete me -->
+
+    <config evaluator="string-compare" condition="activiti$activitiParallelGroupReview">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="bpm:workflowDescription" />
+                    <show id="bpm:workflowDueDate" />
+                    <show id="bpm:workflowPriority" />
+                    <show id="bpm:groupAssignee" />
+                    <show id="wf:requiredApprovePercent" />
+                    <show id="packageItems" />
+                    <show id="bpm:sendEMailNotifications" />
+                </field-visibility>
+                <appearance>
+                    <set id="" appearance="title" label-id="workflow.set.general" />
+                    <set id="info" appearance="" template="/org/alfresco/components/form/2-column-set.ftl" />
+                    <set id="assignee" appearance="title" label-id="workflow.set.assignee" />
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <set id="other" appearance="title" label-id="workflow.set.other" />
+
+                    <field id="bpm:workflowDescription" label-id="workflow.field.message">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="bpm:workflowDueDate" label-id="workflow.field.due" set="info">
+                        <control template="/org/alfresco/components/form/controls/date.ftl">
+                            <control-param name="showTime">false</control-param>
+                            <control-param name="submitTime">false</control-param>
+                        </control>
+                    </field>
+                    <field id="bpm:workflowPriority" label-id="workflow.field.priority" set="info">
+                        <control template="/org/alfresco/components/form/controls/workflow/priority.ftl" />
+                    </field>
+                    <field id="wf:requiredApprovePercent" label-id="workflow.field.requiredApprovePercent" set="assignee">
+                        <control template="/org/alfresco/components/form/controls/percentage-approve.ftl">
+                            <control-param name="minValue">1</control-param>
+                            <control-param name="maxValue">100</control-param>
+                        </control>
+                    </field>
+                    <field id="bpm:groupAssignee" label-id="workflow.field.review_group" set="assignee" >
+                            <control template="/orgchart-group-picker.ftl"/>
+                    </field>
+                    <field id="packageItems" set="items" />
+                    <field id="bpm:sendEMailNotifications" set="other">
+                        <control template="/org/alfresco/components/form/controls/workflow/email-notification.ftl" />
+                    </field>
+                </appearance>
+            </form>
+        </forms>
+    </config>
+
+	<!-- Orgchart UI config forms -->
+	<config evaluator="model-type" condition="alvexoc:UIConfig">
+		<forms>
+			<!-- Create Form -->
+			<form>
+				<field-visibility>
+					<show id="alvexoc:viewType" />
+					<show id="alvexoc:showUnitsRecursively" />
+					<show id="alvexoc:superviseUnitsRecursively" />
+					<show id="alvexoc:defaultRoleName" />
+				</field-visibility>
+				<create-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+				<appearance>
+					<set id="config" appearance="" label="" />
+					<field set="config" id="alvexoc:viewType" />
+					<field set="config" id="alvexoc:showUnitsRecursively" />
+					<field set="config" id="alvexoc:superviseUnitsRecursively" />
+					<field set="config" id="alvexoc:defaultRoleName" />
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<config evaluator="node-type" condition="alvexoc:UIConfig">
+		<forms>
+			<!-- View / Edit Form -->
+			<form>
+				<field-visibility>
+					<show id="alvexoc:viewType" />
+					<show id="alvexoc:showUnitsRecursively" />
+					<show id="alvexoc:superviseUnitsRecursively" />
+					<show id="alvexoc:defaultRoleName" />
+				</field-visibility>
+				<view-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+				<edit-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+				<appearance>
+					<set id="config" appearance="" label="" />
+					<field set="config" id="alvexoc:viewType" />
+					<field set="config" id="alvexoc:showUnitsRecursively" />
+					<field set="config" id="alvexoc:superviseUnitsRecursively" />
+					<field set="config" id="alvexoc:defaultRoleName" />
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<!-- Orgchart sync config forms -->
+
+	<config evaluator="model-type" condition="alvexoc:syncConfig">
+		<forms>
+			<!-- Create Form -->
+			<form>
+				<field-visibility>
+					<show id="alvexoc:syncSource" />
+					<show id="alvexoc:syncRootGroupName" />
+				</field-visibility>
+				<create-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+				<appearance>
+					<set id="config" appearance="" label="" />
+					<field set="config" id="alvexoc:syncSource" />
+					<field set="config" id="alvexoc:syncRootGroupName" />
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<config evaluator="node-type" condition="alvexoc:syncConfig">
+		<forms>
+			<!-- View / Edit Form -->
+			<form>
+				<field-visibility>
+					<show id="alvexoc:syncSource" />
+					<show id="alvexoc:syncRootGroupName" />
+				</field-visibility>
+				<view-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+				<edit-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+				<appearance>
+					<set id="config" appearance="" label="" />
+					<field set="config" id="alvexoc:syncSource" />
+					<field set="config" id="alvexoc:syncRootGroupName" />
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<!-- Orgchart unit add / modify forms -->
+
+	<config evaluator="model-type" condition="alvexoc:unit">
+		<forms>
+			<!-- Create Form -->
+			<form>
+				<field-visibility>
+					<show id="alvexoc:unitDisplayName" />
+					<show id="alvexoc:unitWeight" />
+					<show id="alvexoc:admin" />
+					<show id="alvexoc:supervisor" />
+				</field-visibility>
+				<create-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+				<appearance>
+					<set id="config" appearance="" label="" />
+					<field set="config" id="alvexoc:unitDisplayName" />
+					<field set="config" id="alvexoc:unitWeight" help-id="alvex.orgchart.what_is_weight"/>
+					<field set="config" id="alvexoc:admin" />
+					<field set="config" id="alvexoc:supervisor" />
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<config evaluator="node-type" condition="alvexoc:unit">
+		<forms>
+			<!-- View / Edit Form -->
+			<form>
+				<field-visibility>
+					<show id="alvexoc:unitDisplayName" />
+					<show id="alvexoc:unitWeight" />
+					<show id="alvexoc:admin" />
+					<show id="alvexoc:supervisor" />
+				</field-visibility>
+				<view-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+				<edit-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+				<appearance>
+					<set id="config" appearance="" label="" />
+					<field set="config" id="alvexoc:unitDisplayName" />
+					<field set="config" id="alvexoc:unitWeight" help-id="alvex.orgchart.what_is_weight"/>
+					<field set="config" id="alvexoc:admin" />
+					<field set="config" id="alvexoc:supervisor" />
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<!-- Orgchart role definition add / modify forms -->
+
+	<config evaluator="model-type" condition="alvexoc:roleDefinition">
+		<forms>
+			<!-- Create Form -->
+			<form>
+				<field-visibility>
+					<show id="alvexoc:roleDisplayName" />
+					<show id="alvexoc:roleWeight" />
+				</field-visibility>
+				<create-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+				<appearance>
+					<set id="config" appearance="" label="" />
+					<field set="config" id="alvexoc:roleDisplayName" />
+					<field set="config" id="alvexoc:roleWeight" help-id="alvex.orgchart.what_is_weight"/>
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+	<config evaluator="node-type" condition="alvexoc:roleDefinition">
+		<forms>
+			<!-- View / Edit Form -->
+			<form>
+				<field-visibility>
+					<show id="alvexoc:roleDisplayName" />
+					<show id="alvexoc:roleWeight" />
+				</field-visibility>
+				<view-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+				<edit-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+				<appearance>
+					<set id="config" appearance="" label="" />
+					<field set="config" id="alvexoc:roleDisplayName" />
+					<field set="config" id="alvexoc:roleWeight" help-id="alvex.orgchart.what_is_weight"/>
+				</appearance>
+			</form>
+		</forms>
+	</config>
+
+</alfresco-config>

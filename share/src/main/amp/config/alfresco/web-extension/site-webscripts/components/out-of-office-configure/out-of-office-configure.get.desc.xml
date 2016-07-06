@@ -1,0 +1,5 @@
+<webscript>
+	<shortname>out-of-office-configure</shortname>
+	<description>Renders page component with out of office configuration</description>
+	<url>/components/alvex/orgchart/out-of-office-configure</url>
+</webscript>

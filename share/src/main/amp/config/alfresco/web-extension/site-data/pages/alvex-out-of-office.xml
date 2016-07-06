@@ -1,0 +1,8 @@
+<page>
+	<title>Out of Office</title>
+	<title-id>page.out-of-office.title</title-id>
+	<description>Out of Office</description>
+	<description-id>page.out-of-office.description</description-id>
+	<template-instance>alvex-out-of-office</template-instance>
+	<authentication>user</authentication>
+</page>

@@ -1,0 +1,14 @@
+.out-of-office
+{
+	margin: 16px 10px 10px;
+}
+
+.out-of-office .title {
+/*	font-size: 123.1%; */
+	font-weight: bold;
+	padding-bottom: 0.5em;
+}
+
+.out-of-office-main {
+	padding-bottom: 0.5em;
+}

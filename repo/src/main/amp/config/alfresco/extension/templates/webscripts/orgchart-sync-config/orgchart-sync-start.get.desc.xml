@@ -1,0 +1,11 @@
+<webscript>
+  <shortname>orgchart-sync-start</shortname>
+  <description><![CDATA[
+  Starts orgchart sync
+  ]]></description>
+  <url>/api/alvex/orgchart/sync-start</url>
+  <format default="json"/>
+  <authentication>admin</authentication>
+  <transaction>required</transaction>
+  <lifecycle>public_api</lifecycle>
+</webscript>
