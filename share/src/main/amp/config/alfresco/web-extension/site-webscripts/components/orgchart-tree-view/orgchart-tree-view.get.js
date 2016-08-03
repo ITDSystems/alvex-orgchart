@@ -1,4 +1,4 @@
-<import resource="classpath:/alfresco/web-extension/site-webscripts/com/alvexcore/js/alvex-config.lib.js">
+<import resource="classpath:alfresco/web-extension/site-webscripts/com/alvexcore/js/alvex-config.lib.js">
 
 var uiConfig = Alvex.configs.getConfig('orgchart', 'orgchart-view.default');
 var syncConfig = Alvex.configs.getConfig('orgchart', 'orgchart-sync.default');
