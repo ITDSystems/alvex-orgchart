@@ -28,6 +28,6 @@ public class OrgchartExtension extends ShareExtension {
 	// constructor
 	public OrgchartExtension() throws Exception {
 		id = "orgchart";
-		extInfoPath = "alvex-orgchart.properties";
+		
 	}
 }
