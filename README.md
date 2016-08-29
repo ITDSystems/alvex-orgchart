@@ -8,9 +8,11 @@ Orgstructure for Alfresco. It extends standard user&groups functionality by addi
 Build
 -----
 Option 1:
+
 Build it via [alvex-meta](https://github.com/ITDSystems/alvex-meta). It allows to build a stable version with all dependencies inside the package.
 
 Option 2:
+
 Build from this repo. The component may be packaged in two ways: *amp* and *jar*.
 To build amp use `mvn clean package`, to build installable jar use `mvn -P make-jar clean package`.
 
