@@ -18,17 +18,16 @@ Features:
 
 Compatible with Alfresco 5.1.
 
+This component depends on:
+* [Alvex Utils](https://github.com/ITDSystems/alvex-utils)
+
 # Downloads
 
-Alvex component builds are automatically published to [nexus.itdhq.com](http://nexus.itdhq.com) by Travis CI.
+Download ready-to-use Alvex components via [Alvex](https://github.com/ITDSystems/alvex#downloads).
 
 # Build from source
 
 To build Alvex follow [this guide](https://github.com/ITDSystems/alvex#build-component-from-source).
-
-### Dependencies
-
-This component depends on [Alvex Utils](https://github.com/ITDSystems/alvex-utils). Please install it together with Alvex Orgchart before starting your Alfresco.
 
 # Use
 
