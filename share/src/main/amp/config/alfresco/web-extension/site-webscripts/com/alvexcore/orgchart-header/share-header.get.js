@@ -5,30 +5,22 @@ if (peopleMenu != null) {
   peopleMenu.config.label = "header.menu.orgchart-group.label",
   peopleMenu.config.widgets = [
     {
-      name: "alfresco/menus/AlfMenuGroup",
-      config: {
-        label: "header.menu.orgchart-group.label",
-        widgets: [
-          {
-            name: "alfresco/header/AlfMenuItem",
-            config:
-            {
-              id: "HEADER_ORGCHART",
-              label: "header.menu.orgchart.label",
-              targetUrl: "alvex-orgchart"
-            }
-          },
-          {
-            name: "alfresco/header/AlfMenuItem",
-            config:
-            {
-              id: "HEADER_PEOPLE",
-              label: "header.menu.people-finder.label",
-              targetUrl: "people-finder"
-            }
-          }
-        ]
-      }
+       name: "alfresco/header/AlfMenuItem",
+       config:
+       {
+         id: "HEADER_ORGCHART",
+         label: "header.menu.orgchart.label",
+         targetUrl: "alvex-orgchart"
+       }
+    },
+    {
+       name: "alfresco/header/AlfMenuItem",
+       config:
+       {
+         id: "HEADER_PEOPLE",
+         label: "header.menu.people-finder.label",
+         targetUrl: "people-finder"
+       }
     }
   ];
   var userMenu = widgetUtils.findObject(model.jsonModel, "id", "HEADER_USER_MENU");
