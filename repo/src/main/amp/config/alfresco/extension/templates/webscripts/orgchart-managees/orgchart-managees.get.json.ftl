@@ -12,7 +12,7 @@
 			"firstName": "${person.firstName}",
 			"lastName": "${person.lastName}",
 			"nodeRef": "${person.node?string}", 
-			"name": "${person.lastName}, ${person.firstName}"
+			"name": <#if person.lastName?has_content>"${person.lastName}, <#else>"</#if>${person.firstName}"
  		}<#if person_has_next>,</#if>
  		</#list>
 		</#if>
