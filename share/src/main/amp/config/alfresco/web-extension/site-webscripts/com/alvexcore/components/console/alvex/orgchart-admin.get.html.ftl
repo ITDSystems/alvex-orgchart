@@ -45,7 +45,6 @@
 				</span>
 			</div>
 		</div>
-		<#if alvexEdition == 'Enterprise' >
 		<div style="padding-bottom: 1em;">
 			<div class="label" style="float: left;">${msg("alvex.orgchart.syncParameters")}:</div>
 			<div style="padding-left: 15em;">
@@ -71,7 +70,6 @@
 				</span>
 			</div>
 		</div>
-		</#if>
 	</div>
 	<hr style="margin-top: 15px; margin-bottom: 15px;"/>
 	<div class="title set-bordered-panel-heading">
